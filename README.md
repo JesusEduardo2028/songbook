@@ -1,6 +1,6 @@
 # README #
 
-### Rails Foo ###
+### Songbook ###
 
 * Quick summary
 Rails App - fast template
