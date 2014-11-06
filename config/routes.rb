@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :albums
+
   resources :bands
 
   devise_for :users
