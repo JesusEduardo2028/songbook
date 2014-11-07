@@ -35,6 +35,8 @@ gem 'mongoid_search'
 gem 'will_paginate_mongoid'
 gem 'cancancan', '~> 1.9'
 
+gem 'grape', github: 'intridea/grape'
+
 
 group :development do
   gem 'haml-rails' # only in dev, because haml-rails adds the generators
