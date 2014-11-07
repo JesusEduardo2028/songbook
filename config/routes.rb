@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'dashboard#index'
 
+  mount API => '/'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
