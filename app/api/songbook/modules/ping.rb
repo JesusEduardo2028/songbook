@@ -11,6 +11,9 @@ module Songbook
         end
 
         desc 'returns pong if authentication process is valid.'
+        params do
+          requires :songbook_token, type: String
+        end
         get :protected_ping do
           authenticated_user?
           { ping: params[:pong] || 'pong' }
