@@ -27,7 +27,7 @@ module Songbook
         resource :bands do
           # GET
           desc 'returns all existent bands', {
-              entity: Songbook::Modules::Band,
+              entity: Songbook::Entities::Band,
               notes: <<-NOTE
                 ### Description
                 It returns all paginated bands.  by default: page = 1 per_page = 10
