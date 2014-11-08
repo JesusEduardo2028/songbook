@@ -62,7 +62,7 @@ describe 'Band', :type => :request do
           post '/api/v1/bands', "#{token}&#{data}"
 
           expect(response.status).to eq 201
-          expect(JSON.parse(response.body)).to match(expected_response.stringify_keys)
+          expect(JSON.parse(response.body).except('id')).to match(expected_response.stringify_keys)
         end
       end
 
