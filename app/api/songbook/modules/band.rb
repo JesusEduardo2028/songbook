@@ -6,6 +6,23 @@ module Songbook
 
       content_type :json, 'application/json'
 
+      helpers do
+        # Pagination stuff, unfortunately it cannot be located in API root class
+        params :pagination do
+          optional :page, type: Integer
+          optional :per_page, type: Integer
+        end
+
+        params :auth do
+          requires :songbook_token, type: String, desc: 'Auth token', documentation: { example: '837f6b854fc7802c2800302e' }
+        end
+
+        params :id do
+          requires :id, type: String, desc: 'Band ID', regexp: /^[[:xdigit:]]{24}$/
+        end
+
+      end
+
       version :v1 do
         resource :bands do
           # GET
@@ -34,9 +51,8 @@ module Songbook
               NOTE
             }
           params do
-            requires :songbook_token, type: String, desc: 'Auth token', documentation: { example: '837f6b854fc7802c2800302e' }
-            optional :page, type: Integer
-            optional :per_page, type: Integer
+            use :pagination
+            use :auth
           end
           get '/', http_codes: [ [200, "Successful"], [401, "Unauthorized"] ] do
             content_type "text/json"
