@@ -20,6 +20,11 @@ class AccessGrant
              {:access_token_expires_at.gt => Time.now}).first
   end
 
+  # Removes all access grant references which their life span has finished
+  def self.prune!
+    where(:created_at.lte => 2.hours.ago).delete_all
+  end
+
   # Update access_token_expires_at field
   def start_expiry_period!
     self.update_attribute(:access_token_expires_at, 2.hours.from_now) unless self.access_token_expires_at.present?
