@@ -2,8 +2,30 @@ class API < Grape::API
   prefix 'api'
 
   helpers do
+    # Authentication stuff
+    def warden
+      env['warden']
+    end
+
+    def authenticated
+      if warden.authenticated?
+        return true
+      elsif params[:songbook_token] and
+          AccessGrant.find_access(params[:songbook_token])
+        return true
+      else
+        error!('401 Unauthorized', 401)
+      end
+    end
+
+    def current_user
+      warden.user || AccessGrant.find_access(params[:songbook_token]).try(:user)
+    end
+
+    # returns 401 if there's no current user
     def authenticated_user?
-      error!('401 Unauthorized', 401) unless params[:songbook_token] == 'the_most_secure_token'
+      authenticated
+      error!('401 Unauthorized', 401) unless current_user
     end
   end
 
