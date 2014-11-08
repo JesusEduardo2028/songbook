@@ -3,7 +3,7 @@
 ### Songbook ###
 
 * Quick summary
-Rails App - fast template
+Rails App - Grape
 
 Features:
 
@@ -19,6 +19,8 @@ Features:
  - Simple Home Page
  - Very Simple Dashboard
  - RSpec with basic config
+ - Grape
+ - Swagger
 
 * Version
 
@@ -34,4 +36,8 @@ Features:
 
     zeus start
 
+    zeus rake db:seed
+
     zeus server
+
+    zeus rspec spec
