@@ -67,6 +67,42 @@ module Songbook
             present bands
           end
 
+          # GET /:id
+          desc 'returns a specific band', {
+              entity: Songbook::Entities::Band,
+              notes: <<-NOTE
+                ### Description
+                It returns a specific band by its id.
+
+                ### Example successful response
+
+                    {
+                      "id": "137a66834fb7802c280000ef",
+                      "name": "Foo Figthers",
+                      "biography" : "band biography",
+                      "genre": "Rock",
+                    }
+
+              NOTE
+            }
+          params do
+            use :pagination
+            use :auth
+            use :id
+          end
+          get '/:id', http_codes: [
+            [200, "Successful"],
+            [400, "Invalid parameter in entry"],
+            [401, "Unauthorized"],
+            [404, "Entry not found"],
+          ]  do
+            content_type "text/json"
+            Mongoid.raise_not_found_error = false
+            band = ::Band.find(params[:id])
+            error!("Document not found for class Entry with id", 404) unless band.present?
+            present band, with: Songbook::Entities::Band
+          end
+
         end
       end
     end
