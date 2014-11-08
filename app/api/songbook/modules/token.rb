@@ -18,8 +18,8 @@ module Songbook
             NOTE
           }
         params do
-          requires :email, type: String
-          requires :password, type: String
+          requires :email, type: String, desc: 'User Email'
+          requires :password, type: String, desc: 'User Password'
         end
         get 'token' do
           {
