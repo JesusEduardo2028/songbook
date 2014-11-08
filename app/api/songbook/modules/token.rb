@@ -5,6 +5,7 @@ module Songbook
 
       version :v1 do
         desc 'Returns a token by authenticating user email and password credentials', {
+            entity: Songbook::Entities::Token,
             notes: <<-NOTE
               ### Description
               It creates a new entry record and returns its current representation.
