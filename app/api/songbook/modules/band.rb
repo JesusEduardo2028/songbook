@@ -102,6 +102,47 @@ module Songbook
             present band, with: Songbook::Entities::Band
           end
 
+          # POST
+          desc 'creates a new band', {
+              entity: Songbook::Entities::Band,
+              notes: <<-NOTE
+                ### Description
+                It creates a new band record and returns its current representation.
+
+                ### Example successful response
+
+                    {
+                      "id": "137a66834fb7802c280000ef",
+                      "name": "Foo Figthers",
+                      "biography" : "band biography",
+                      "genre": "Rock",
+                    }
+
+              NOTE
+            }
+          params do
+            use :auth
+            optional :band, type: Hash do
+              requires :name, type: String, desc: 'Band name', documentation: { example: 'Foo Figthers' }
+              requires :genre, type: String, desc: 'Band genre', documentation: { example: 'Rock' }
+              optional :biography, type: String, desc: 'Band biography', documentation: { example: 'short bio' }
+            end
+          end
+          post '/', http_codes: [
+            [200, "Successful"],
+            [400, "Invalid parameter in entry"],
+            [401, "Unauthorized"],
+            [404, "Entry not found"],
+          ]  do
+            content_type "text/json"
+            band = ::Band.new(params[:band])
+            if band.save
+              present band, with: Songbook::Entities::Band
+            else
+              error!(entry.errors, 400)
+            end
+          end
+
         end
       end
     end
