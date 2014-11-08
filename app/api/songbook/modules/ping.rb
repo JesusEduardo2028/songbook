@@ -7,18 +7,18 @@ module Songbook
 
         desc 'Returns pong.'
         params do
-          optional :pong, type: String
+          optional :pong, type: String, desc: 'pong value'
         end
-        get :ping do
+        get :ping, http_codes: [ [200, "Successful"] ] do
           { ping: params[:pong] || 'pong' }
         end
 
         desc 'returns pong if authentication process is valid.'
         params do
-          requires :songbook_token, type: String
-          optional :pong, type: String
+          requires :songbook_token, type: String, desc: 'Auth token'
+          optional :pong, type: String, desc: 'pong value'
         end
-        get :protected_ping do
+        get :protected_ping, http_codes: [ [200, "Successful"], [401, "Unauthorized"] ] do
           authenticated_user?
           { ping: params[:pong] || 'pong' }
         end
