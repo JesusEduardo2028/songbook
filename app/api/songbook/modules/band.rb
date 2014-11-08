@@ -86,7 +86,6 @@ module Songbook
               NOTE
             }
           params do
-            use :pagination
             use :auth
             use :id
           end
