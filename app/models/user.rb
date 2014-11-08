@@ -36,6 +36,12 @@ class User
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
 
+  # validates user credentials
+  # @return User
+  def self.authenticate(email, password)
+    User.find_by(email: email) if User.find_by(email: email).try(:valid_password?, password)
+  end
+
   def self.serialize_into_session(record)
     [record.id.to_s, record.authenticatable_salt]
   end

@@ -23,9 +23,13 @@ module Songbook
           requires :password, type: String, desc: 'User Password'
         end
         get 'token', http_codes: [ [200, "Successful"], [401, "Unauthorized"] ] do
+          user = ::User.authenticate(params[:email], params[:password])
+          error!("401 Unauthorized", 401) if user.nil?
+          AccessGrant.prune!
+          access_grant = AccessGrant.find_or_create_by(:user => user)
           {
-            access_token: 'the_most_secure_token',
-            expires_in: Time.now.tomorrow
+            access_token: access_grant.access_token,
+            expires_in: access_grant.access_token_expires_at
           }
         end
       end
