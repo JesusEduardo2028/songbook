@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'dashboard' => 'dashboard#index'
 
   mount API => '/'
+  mount GrapeSwaggerRails::Engine => '/api_doc'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
