@@ -21,7 +21,7 @@ module Songbook
           requires :email, type: String, desc: 'User Email'
           requires :password, type: String, desc: 'User Password'
         end
-        get 'token' do
+        get 'token', http_codes: [ [200, "Successful"], [401, "Unauthorized"] ] do
           {
             access_token: 'the_most_secure_token',
             expires_in: Time.now.tomorrow
