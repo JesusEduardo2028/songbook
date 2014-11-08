@@ -23,6 +23,10 @@ module Songbook
 
       end
 
+      before_validation do
+        authenticated_user?
+      end
+
       version :v1 do
         resource :bands do
           # GET
