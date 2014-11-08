@@ -1,0 +1,3 @@
+class AccessGrant
+
+end
