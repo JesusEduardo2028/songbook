@@ -1,4 +1,17 @@
 GIT
+  remote: git://github.com/codescrum/grapi.git
+  revision: 53c41302953fa5de89df703dd7dfeffb85ec8bcf
+  branch: master
+  specs:
+    grapi (0.0.1)
+      activesupport
+      grape (= 0.8.0)
+      grape-entity (= 0.4.2)
+      pry-byebug
+      railties
+      rspec-rails
+
+GIT
   remote: git://github.com/jkrmr/jazz_hands.git
   revision: dbb97a2f5782db30c74819fc9699fad84ab8078f
   branch: byebug_and_updated_pry
@@ -375,6 +388,7 @@ DEPENDENCIES
   grape-entity (= 0.4.2)
   grape-swagger (= 0.7.2)
   grape-swagger-rails (= 0.0.10)
+  grapi!
   haml
   haml-rails
   hashie_rails
