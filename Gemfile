@@ -40,7 +40,8 @@ gem 'grape-entity', '0.4.2'
 gem 'grape-swagger', '0.7.2'
 gem 'grape-swagger-rails', '0.0.10'
 gem 'hashie_rails'
-gem 'grapi', github: 'codescrum/grapi', branch: 'master'
+#gem 'grapi', github: 'codescrum/grapi', branch: 'master'
+gem 'grapi', path: '../grapi'
 
 group :development do
   gem 'haml-rails' # only in dev, because haml-rails adds the generators
