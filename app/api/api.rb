@@ -34,7 +34,7 @@ class API < Grape::API
   mount Songbook::Modules::Ping
   mount Songbook::Modules::Token
   mount Songbook::Modules::Band
-  #mount Songbook::Modules::User
+  mount Songbook::Modules::User
 
   # Adds the swagger documentation to your
   # api. You only need this once, not in
