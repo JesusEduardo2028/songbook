@@ -8,7 +8,7 @@ class User
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
-
+  field :username,           type: String, default: ""
   ## Recoverable
   field :reset_password_token,   type: String
   field :reset_password_sent_at, type: Time
@@ -38,6 +38,7 @@ class User
 
   # validates user credentials
   # @return User
+  validates :username, format: { with: /\A[a-zA-Z0-9]+\Z/ }
   def self.authenticate(email, password)
     User.find_by(email: email) if User.find_by(email: email).try(:valid_password?, password)
   end
