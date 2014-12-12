@@ -41,6 +41,7 @@ gem 'grape-swagger', '0.7.2'
 gem 'grape-swagger-rails', '0.0.10'
 gem 'hashie_rails'
 gem 'grape-transformations'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 group :development do
   gem 'haml-rails' # only in dev, because haml-rails adds the generators

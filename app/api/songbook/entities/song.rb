@@ -6,7 +6,9 @@ module Songbook
       end
       expose :name, documentation: { type: "string", desc: "song name", example: "All my life" }
       expose :duration, documentation: { type: "string", desc: "song duration", example: "300000" }
-      expose :url, documentation: { type: "string", desc: "song url", example: "http://braimserver/songs/all_my_life.mp3" }
+      expose :url, documentation: { type: "string", desc: "song url", example: "http://braimserver/songs/all_my_life.mp3" } do |song,options|
+        song.file_url
+      end
     end
   end
 end
