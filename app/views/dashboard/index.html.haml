@@ -5,4 +5,6 @@
         = render 'side_bar'
     .col-md-9
       .main-content
-
+        -@emo_entries.each do|emo_entry|
+          %p
+            =emo_entry
