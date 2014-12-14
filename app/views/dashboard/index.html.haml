@@ -5,4 +5,6 @@
         = render 'side_bar'
     .col-md-9
       .main-content
-        = high_chart("some_id", @emo_chart)
+        -@emo_sessions.each do|session|
+          =link_to "Session #{session.start_at}", session
+        

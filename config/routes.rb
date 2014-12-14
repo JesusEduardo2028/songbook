@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :emo_sessions
+
   resources :emo_entries
 
   resources :songs

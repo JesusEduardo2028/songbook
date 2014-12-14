@@ -24,6 +24,7 @@ class User
   field :last_sign_in_ip,    type: String
 
   has_one :access_grant
+  has_many :emo_sessions
 
   ## Confirmable
   # field :confirmation_token,   type: String
