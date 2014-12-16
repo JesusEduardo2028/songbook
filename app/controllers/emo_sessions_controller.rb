@@ -1,5 +1,5 @@
 class EmoSessionsController < ApplicationController
-  before_action :set_emo_session, only: [:show, :edit, :update, :destroy]
+  before_action :set_emo_session, only: [:show, :edit, :update, :destroy , :raw, :affectiv]
 
   respond_to :html
 
@@ -9,10 +9,12 @@ class EmoSessionsController < ApplicationController
   end
 
   def show
+    respond_with(@emo_session)
+  end
+
+  def raw
     @emo_entries = @emo_session.emo_entries
-    
-    @timeline = @emo_entries.map {|entry| Time.at(entry.timestamp.to_i)}
-    @data_node_0 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[0]]}
+    @data_node_0 = @emo_entries.map {|entry| [entry.timestamp.to_i,entry.nodes[0]]}
     @data_node_1 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[1]]}
     @data_node_2 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[2]]}
     @data_node_3 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[3]]}
@@ -26,52 +28,16 @@ class EmoSessionsController < ApplicationController
     @data_node_11 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[11]]}
     @data_node_12 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[12]]}
     @data_node_13 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[13]]}
+    render :show
+  end
 
-
-    @emo_chart = LazyHighCharts::HighChart.new('graph') do |f|
-        f.chart(type: 'spline')
-        f.title(text: "Emo entries for #{current_user.email}")
-
-        f.subtitle(text: 'Irregular time data in Highcharts JS')
-        f.xAxis({
-            type: 'datetime',
-            dateTimeLabelFormats: {
-                month: '%A, %b %e',
-                year: '%b'
-            },
-            title: {
-                text: "Date\n"
-            }
-        })
-
-        f.legend(floating: true,align: "center",y: 13,align:"right")
-        f.yAxis({
-            title: {
-                text: 'Snow depth (m)'
-            },
-            min: 0
-        })
-        f.tooltip({
-            headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%e - %b}: {point.y:.2f} m'
-        })
-
-        f.series(name: 'node 0', data: @data_node_0 , marker: {enabled: false})
-        f.series(name: 'node 1', data: @data_node_1 , marker: {enabled: false})
-        f.series(name: 'node 2', data: @data_node_2 , marker: {enabled: false})
-        f.series(name: 'node 3', data: @data_node_3 , marker: {enabled: false})
-        f.series(name: 'node 4', data: @data_node_4 , marker: {enabled: false})
-        f.series(name: 'node 5', data: @data_node_5 , marker: {enabled: false})
-        f.series(name: 'node 6', data: @data_node_6 , marker: {enabled: false})
-        f.series(name: 'node 7', data: @data_node_7 , marker: {enabled: false})
-        f.series(name: 'node 8', data: @data_node_8 , marker: {enabled: false})
-        f.series(name: 'node 9', data: @data_node_9 , marker: {enabled: false})
-        f.series(name: 'node 10', data: @data_node_10 , marker: {enabled: false})
-        f.series(name: 'node 11', data: @data_node_11 , marker: {enabled: false})
-        f.series(name: 'node 12', data: @data_node_12 , marker: {enabled: false})
-        f.series(name: 'node 13', data: @data_node_13 , marker: {enabled: false})
-    end
-    respond_with(@emo_session)
+  def affectiv
+    @emo_entries = @emo_session.emo_entries
+    @data_excitement = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.excitement.to_f]}
+    @data_frustration = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.frustration.to_f]}
+    @data_meditation = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.meditation.to_f]}
+    @data_engagement = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.engagement.to_f]}
+    render :show
   end
 
   def new

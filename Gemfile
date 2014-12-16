@@ -42,7 +42,7 @@ gem 'grape-swagger-rails', '0.0.10'
 gem 'hashie_rails'
 gem 'grape-transformations'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
-gem 'lazy_high_charts'
+gem 'highstock-rails'
 
 group :development do
   gem 'haml-rails' # only in dev, because haml-rails adds the generators

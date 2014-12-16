@@ -5,6 +5,8 @@
         = render 'side_bar'
     .col-md-9
       .main-content
-        -@emo_sessions.each do|session|
-          =link_to "Session #{session.start_at}", session
+        %ul
+          -@emo_sessions.each do|session|
+            %li  
+              =link_to "Session #{session.date}", session
         

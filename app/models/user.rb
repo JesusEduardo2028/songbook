@@ -47,4 +47,10 @@ class User
   def self.serialize_into_session(record)
     [record.id.to_s, record.authenticatable_salt]
   end
+
+   def serialize_from_session(key, salt)
+    record = to_adapter.get(key.to_s)
+    record if record && record.authenticatable_salt == salt
+  end
+
 end

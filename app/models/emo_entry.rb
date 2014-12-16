@@ -3,7 +3,7 @@ class EmoEntry
   belongs_to :emo_session
 
   field :nodes , type: Array
-  field :timestamp, type: String
+  field :timestamp, type: Float
   field :excitement, type: String
   field :frustration, type: String
   field :meditation, type: String
