@@ -8,6 +8,5 @@ class EmoEntry
   field :frustration, type: String
   field :meditation, type: String
   field :engagement, type: String
-  field :email, type: String
 
 end

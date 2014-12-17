@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :player_entries
+
   resources :emo_sessions do 
     get 'raw' , on: :member
     get 'affectiv', on: :member

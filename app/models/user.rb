@@ -44,13 +44,15 @@ class User
     User.find_by(email: email) if User.find_by(email: email).try(:valid_password?, password)
   end
 
-  def self.serialize_into_session(record)
-    [record.id.to_s, record.authenticatable_salt]
+  def self.serialize_from_session(key, salt)
+    record = to_adapter.get(key[0]["$oid"])
+    record if record && record.authenticatable_salt == salt
   end
 
-   def serialize_from_session(key, salt)
-    record = to_adapter.get(key.to_s)
-    record if record && record.authenticatable_salt == salt
+  def self.serialize_from_cookie(id, remember_token)
+    record = to_adapter.get(id[0]["$oid"])
+    record if record && !record.remember_expired? &&
+    Devise.secure_compare(record.rememberable_value, remember_token)
   end
 
 end
