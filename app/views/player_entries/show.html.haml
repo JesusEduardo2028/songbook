@@ -12,6 +12,9 @@
 %p
   user:
   =@player_entry.emo_session.user.username
+%p
+  State:
+  =@player_entry.player_state
 
 = link_to 'Edit', edit_player_entry_path(@player_entry)
 \|

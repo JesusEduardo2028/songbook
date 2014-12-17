@@ -14,6 +14,7 @@ class EmoSessionsController < ApplicationController
 
   def raw
     @emo_entries = @emo_session.emo_entries
+    @player_entries = @emo_session.player_entries 
     @data_node_0 = @emo_entries.map {|entry| [entry.timestamp.to_i,entry.nodes[0]]}
     @data_node_1 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[1]]}
     @data_node_2 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[2]]}
@@ -28,15 +29,18 @@ class EmoSessionsController < ApplicationController
     @data_node_11 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[11]]}
     @data_node_12 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[12]]}
     @data_node_13 = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.nodes[13]]}
+    @player_timeline = @player_entries.map {|entry| [entry.timestamp.to_f,entry.player_state]}
     render :show
   end
 
   def affectiv
     @emo_entries = @emo_session.emo_entries
+    @player_entries = @emo_session.player_entries 
     @data_excitement = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.excitement.to_f]}
     @data_frustration = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.frustration.to_f]}
     @data_meditation = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.meditation.to_f]}
     @data_engagement = @emo_entries.map {|entry| [entry.timestamp.to_f,entry.engagement.to_f]}
+    @player_timeline = @player_entries.map {|entry| [entry.timestamp.to_f,entry.player_state]}
     render :show
   end
 
